@@ -1,0 +1,29 @@
+.input__wrapper {
+  display: block;
+
+  .input__field {
+    border: var(--border-input-color) 1px solid;
+    border-radius: calc(var(--base) / 2);
+    input {
+      box-sizing: border-box;
+      background: transparent;
+      border: none;
+      box-sizing: border-box;
+      color: var(--blue-darkest);
+      font-size: 1rem;
+      height: calc(var(--base) * 2.5);
+      padding: 0 calc(var(--base) * 0.75 );
+      width: 100%;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  
+  label {
+    color: var(--blue-darkest);
+    display: block;
+    font-size: 0.875rem;
+    padding-bottom: 4px;
+  }
+}

@@ -1,0 +1,7 @@
+.cta {
+  padding-top: calc(var(--base));
+
+  .button {
+    width: 100%;
+  }
+}
