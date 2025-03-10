@@ -7,7 +7,7 @@ export const Button = ({ onClickCallback, children, type }) => {
 
   return (
     <button onClick={handleClick} className={`button button__${type}`}>
-      {children}
+      <strong>{children}</strong>
     </button>
   );
 };

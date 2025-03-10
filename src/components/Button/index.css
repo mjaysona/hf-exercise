@@ -21,7 +21,7 @@ button {
     }
   }
   &.button__secondary {
-    background: var(--bg-btn-color);
+    background: white;
     color: var(--fg-secondary-btn-color);
     border: 2px solid var(--border-btn-color);
     &:hover {

@@ -9,7 +9,7 @@
   --purple-lightest: #F7F0FF;
   --purple-lighter: #E4CAFF;
   --purple: #7E3DDA;
-  --purple-darkest: #5114A6;
+  --purple-darkest: #1b191e;
   --gray-lighter: #AEB9C9;
 
   --text-color: #546378;
@@ -21,8 +21,8 @@
   --bg-btn-primary-color--hover: var(--purple);
   --bg-btn-primary-color--active: var(--purple-darkest);
   --bg-btn-secondary-color: var(--primary-color);
-  --bg-btn-secondary-color--hover: var(--purple-lighter);
-  --bg-btn-secondary-color--active: var(--purple-lightest);
+  --bg-btn-secondary-color--hover: var(--purple-lightest);
+  --bg-btn-secondary-color--active: var(--purple-lighter);
   --border-btn-color: var(--purple);
   --fg-primary-btn-color: white;
   --fg-secondary-btn-color: var(--purple);
@@ -59,7 +59,7 @@ a {
   color: var(--secondary-color);
   text-decoration: underline;
   &:hover {
-    color: var(--blue-dark);
+    color: var(--blue);
   }
   &:active {
     color: var(--blue-darker);
