@@ -1,0 +1,7 @@
+.notification {
+  background: var(--bg-notification-color);
+  border: var(--border-notification-color) 1px solid;
+  border-radius: var(--base);
+  color: var(--fg-notification-color);
+  padding: calc(var(--base) * 0.75) calc(var(--base));
+}

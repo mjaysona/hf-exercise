@@ -3,6 +3,8 @@ import { Card } from '../Card'
 import { Button } from '../Button';
 import './index.css';
 import { InputField } from '../InputField';
+import { Notification } from '../Notification';
+import { ReactComponent as UserIcon} from '../../assets/icons/user.svg';
 
 export const AuthWrapper = () => {
   const [username, setUsername] = useState('');
@@ -10,21 +12,25 @@ export const AuthWrapper = () => {
   const [isUserFound, setIsUserFound] = useState();
   const [isUsernameInvalid, setIsUsernameInvalid] = useState(false);
   const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
+  const [isCodeInvalid, setIsCodeInvalid] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [shouldLoginViaCode, setShouldLoginViaCode] = useState(false);
   const [code, setCode] = useState('');
 
   const handleInputChanged = (value, type) => {
     if (type === 'password') {
+      if (value) setIsPasswordInvalid(false);
       setPassword(value);
       return;
     }
 
     if (type === 'code') {
+      if (value) setIsCodeInvalid(false);
       setCode(value);
       return;
     }
     
+    if (value) setIsUsernameInvalid(false);
     setUsername(value);
   };
 
@@ -39,7 +45,16 @@ export const AuthWrapper = () => {
   }
 
   const handleLoginClicked = () => {
-    // assume password is valid
+    if (!shouldLoginViaCode && !password) {
+      setIsPasswordInvalid(true);
+      return;
+    }
+
+    if (shouldLoginViaCode && !code) {
+      setIsCodeInvalid(true);
+      return;
+    }
+
     setIsLoggedIn(true);
   }
 
@@ -49,24 +64,48 @@ export const AuthWrapper = () => {
 
   const handleResetFormClicked = () => {
     setIsUserFound(false);
-    setIsLoggedIn(false);
-    setUsername('');
-    setPassword('');
     setIsUsernameInvalid(false);
     setIsPasswordInvalid(false);
+    setIsCodeInvalid(false);
+    setIsLoggedIn(false);
     setShouldLoginViaCode(false);
+    setUsername('');
+    setPassword('');
     setCode('');
   }
   
   const renderLoginForm = () => {
     return (
       <Card title={'Log in to your account'}>
+        <div className='logged-user'>
+          <Notification>
+            <div className='logged-user__avatar'>
+              <div className='logged-user__avatar__icon'>
+                <UserIcon />
+              </div>
+              <div className='logged-user__avatar__name'>
+                <strong>{username}</strong>
+              </div>
+            </div>
+            <div className='logged-user__cta'>
+              <span className='non-link-text' onClick={handleResetFormClicked}>
+                <strong>Switch account</strong>
+              </span>
+            </div>
+          </Notification>
+        </div>
         <form>
-          <div className='note'>We’ve sent a 6 digit code to your email. Enter it below to log in.</div>
+          {shouldLoginViaCode &&
+            <div className='note'>We've sent a 6 digit code to your email. Enter it below to log in.</div>}
           <InputField
-            error={isPasswordInvalid && !shouldLoginViaCode ? 'Invalid password' : ''}
+            error={
+              isPasswordInvalid || isCodeInvalid
+                ? `Invalid ${shouldLoginViaCode ? 'code' : 'password'}`
+                : ''
+            }
             type={shouldLoginViaCode ? 'code' : 'password'}
             label={shouldLoginViaCode ? 'Code' : 'Password'}
+            maxLength={shouldLoginViaCode ? 6 : undefined}
             onChangeCallback={(value) => handleInputChanged(value, shouldLoginViaCode ? 'code' : 'password')}
             value={shouldLoginViaCode ? code : password}
           />
@@ -89,14 +128,14 @@ export const AuthWrapper = () => {
         </form>
         <div className='help'>
           {shouldLoginViaCode
-            ? <>Need help? <a href="#">Forgot password</a></>
-            : <>Didn’t get an email? <a href="#">Resend code</a></>
+            ? <>Need help? <span className='non-link-text'>Forgot password</span></>
+            : <>Didn't get an email? <span className='non-link-text'>Resend code</span></>
           }
         </div>
       </Card>
     )
-  };
-  
+
+  };  
   const renderSuccessfulLogin = () => {
     return (
       <Card title={'Login complete!'}>
@@ -115,7 +154,7 @@ export const AuthWrapper = () => {
         <InputField
           error={isUsernameInvalid ? 'Invalid username' : ''}
           type={'text'}
-          label={'Welcome'}
+          label={'Username'}
           onChangeCallback={handleInputChanged}
           value={username}
         />

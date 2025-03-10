@@ -3,6 +3,9 @@
 
   --primary-color: #A76AFC;
   --secondary-color: #3C479D;
+  --error-color: #FF6464;
+  --blue-lightest: #F8FBFF;
+  --blue-lighter: #A1B1DE;
   --blue: #6878CA;
   --blue-darker: #2E3880;
   --blue-darkest: #273343;
@@ -28,6 +31,10 @@
   --fg-secondary-btn-color: var(--purple);
   
   --border-input-color: var(--gray-lighter);
+
+  --bg-notification-color: var(--blue-lightest);
+  --fg-notification-color: #000;
+  --border-notification-color: var(--blue-lighter);
 }
 
 html {
@@ -53,11 +60,13 @@ body {
 h1 {
   color: black;
   font-size: 1.25rem;
+  margin-bottom: calc(var(--base) * 1.25);
 }
 
-a {
+a, .non-link-text {
   color: var(--secondary-color);
   text-decoration: underline;
+  cursor: pointer;
   &:hover {
     color: var(--blue);
   }

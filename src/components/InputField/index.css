@@ -4,6 +4,9 @@
   .input__field {
     border: var(--border-input-color) 1px solid;
     border-radius: calc(var(--base) / 2);
+    &.error {
+      border-color: var(--error-color);
+    }
     input {
       box-sizing: border-box;
       background: transparent;
@@ -25,5 +28,10 @@
     display: block;
     font-size: 0.875rem;
     padding-bottom: 4px;
+  }
+
+  .error {
+    font-size: 0.75rem;
+    color: var(--error-color);
   }
 }

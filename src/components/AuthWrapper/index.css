@@ -20,15 +20,34 @@
   }
 }
 
+.cta, .help, .note {
+  color: var(--text-color);
+  font-size: 0.875rem;
+}
+
 .help {
   padding-top: calc(var(--base) * 1.25);
 }
 
-.note {
+.logged-user, .note {
   padding-bottom: calc(var(--base) *1.25);
 }
 
-.cta, .help, .note {
-  color: var(--text-color);
-  font-size: 0.875rem;
+.logged-user {
+  .notification {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    .logged-user__avatar {
+      align-items: center;
+      border-radius: 50%;
+      display: flex;
+      .logged-user__avatar__icon {
+        padding-right: calc(var(--base) / 2);
+      }
+    }
+    .logged-user__cta {
+      font-size: 0.75rem;
+    }
+  }
 }
